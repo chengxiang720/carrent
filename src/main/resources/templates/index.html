@@ -41,10 +41,9 @@
             }
 
             $.post('/rentCar', {'carModel':carModel.trim()}, function (data) {
+                queryRemainCarInfo();
                 alert(data);
             });
-
-            queryRemainCarInfo();
         });
 
         $("#restore").click(function(){
@@ -55,10 +54,9 @@
             }
 
             $.post('/restoreCar?', {'carModel':carModel.trim()}, function (data) {
+                queryRemainCarInfo();
                 alert(data);
             });
-
-            queryRemainCarInfo();
         });
     </script>
 </body>
