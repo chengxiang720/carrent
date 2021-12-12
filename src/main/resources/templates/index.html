@@ -36,7 +36,7 @@
                 return;
             }
 
-            $.post('/rentCar?' + carModel, function (data) {
+            $.post('/rentCar?' + carModel.trim(), function (data) {
                 alert(data);
             });
         });
@@ -48,7 +48,7 @@
                 return;
             }
 
-            $.post('/restoreCar?' + carModel, function (data) {
+            $.post('/restoreCar?' + carModel.trim(), function (data) {
                 alert(data);
             });
         });
