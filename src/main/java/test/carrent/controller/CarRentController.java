@@ -9,7 +9,7 @@ import test.carrent.service.RentService;
 import java.util.Map;
 
 @Slf4j
-@Controller
+@RestController
 public class CarRentController {
 
     @Autowired
@@ -22,7 +22,6 @@ public class CarRentController {
      * @return
      */
     @PostMapping("rentCar")
-    @ResponseBody
     public String rentCar(String carModel) {
         String result;
         boolean isLegalModel = rentService.isLegalModel(carModel);
@@ -45,7 +44,6 @@ public class CarRentController {
      * @return
      */
     @PostMapping("restoreCar")
-    @ResponseBody
     public String restoreCar(String carModel) {
         String result;
         boolean isLegalModel = rentService.isLegalModel(carModel);
@@ -67,7 +65,6 @@ public class CarRentController {
      * @return
      */
     @PostMapping("queryRemainCarInfo")
-    @ResponseBody
     public Map<String, Integer> queryRemainCarInfo() {
         return rentService.queryRemainCarInfo();
     }
