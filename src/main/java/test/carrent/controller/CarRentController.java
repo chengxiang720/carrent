@@ -13,17 +13,12 @@ public class CarRentController {
     @Autowired
     public RentService rentService;
 
-    @GetMapping("index")
-    public String index() {
-        return "index";
-    }
-
     /**
      * 租车
      *
      * @param carModel
      * @return
-     */
+     */.
     @PostMapping("rentCar")
     @ResponseBody
     public String rentCar(String carModel) {
