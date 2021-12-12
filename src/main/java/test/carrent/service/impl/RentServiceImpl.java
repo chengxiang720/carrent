@@ -1,5 +1,6 @@
 package test.carrent.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
@@ -8,6 +9,7 @@ import test.carrent.service.RentService;
 
 import java.util.Map;
 
+@Slf4j
 @Service
 public class RentServiceImpl implements RentService {
 
@@ -22,12 +24,13 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public synchronized boolean rentCar(String carModel) {
-        if (StringUtils.isEmpty(carModel)) {
+        if (StringUtils.isEmpty(carModel) || !CarRentDao.inStockMap.containsKey(carModel)) {
             return false;
         }
 
         int num = CarRentDao.inStockMap.get(carModel);
         if (num < 1) {
+            log.info("车已租完~~");
             return false;
         } else {
             CarRentDao.inStockMap.put(carModel, --num);;
@@ -37,7 +40,7 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public synchronized boolean restoreCar(String carModel) {
-        if (StringUtils.isEmpty(carModel)) {
+        if (StringUtils.isEmpty(carModel) || !CarRentDao.inStockMap.containsKey(carModel)) {
             return false;
         }
 
