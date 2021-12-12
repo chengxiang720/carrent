@@ -18,7 +18,7 @@ public class CarRentController {
      *
      * @param carModel
      * @return
-     */.
+     */
     @PostMapping("rentCar")
     @ResponseBody
     public String rentCar(String carModel) {
