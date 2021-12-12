@@ -6,6 +6,8 @@ import org.thymeleaf.util.StringUtils;
 import test.carrent.dao.CarRentDao;
 import test.carrent.service.RentService;
 
+import java.util.Map;
+
 @Service
 public class RentServiceImpl implements RentService {
 
@@ -46,6 +48,11 @@ public class RentServiceImpl implements RentService {
             CarRentDao.inStockMap.put(carModel, ++num);
         }
         return true;
+    }
+
+    @Override
+    public Map<String, Integer> queryRemainCarInfo() {
+        return CarRentDao.inStockMap;
     }
 
 }

@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <title>租车系统首页</title>
 </head>
-<body>
-    Hello!欢迎来到租车系统，祝您旅途愉快！
+    <p>Hello!欢迎来到租车系统，祝您旅途愉快！</p>
+    <input type="text" id="carModel" placeholder="请输入车型"/>
+    <br/>
+    <br/>
+    <button id ='rent'>租车</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id ='restore'>还车</button>
+    <br/>
+    <br/>
+    <p>当前剩余可租车辆：<span id = 'remain'></span></p>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.post('/queryRemainCarInfo', function (data) {
+                var carInfo = JSON.stringify(data)
+                console.log(carInfo);
+                if (carModel == null || carModel == '' || carModel == "undefined") {
+                    carInfo = '租车太火爆，已经没有可租车辆啦！'
+                } else {
+                    $("#remain").text(carInfo);
+                }
+            });
+        });
+
+        $("#rent").click(function(){
+            var carModel = document.getElementById("carModel").value;
+            if (carModel == null || carModel == '' || carModel == "undefined") {
+                alert("请输入车型");
+                return;
+            }
+
+            $.post('/rentCar?' + carModel, function (data) {
+                alert(data);
+            });
+        });
+
+        $("#restore").click(function(){
+            var carModel = document.getElementById("carModel").value;
+            if (carModel == null || carModel == '' || carModel == "undefined") {
+                alert("请输入车型");
+                return;
+            }
+
+            $.post('/restoreCar?' + carModel, function (data) {
+                alert(data);
+            });
+        });
+    </script>
 </body>
 </html>

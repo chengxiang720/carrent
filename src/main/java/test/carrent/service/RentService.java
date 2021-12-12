@@ -1,5 +1,7 @@
 package test.carrent.service;
 
+import java.util.Map;
+
 public interface RentService {
 
     /**
@@ -25,5 +27,12 @@ public interface RentService {
      * @return
      */
     boolean restoreCar(String carModel);
+
+    /**
+     * 剩余可租用车辆信息
+     *
+     * @return
+     */
+    Map<String, Integer> queryRemainCarInfo();
 
 }

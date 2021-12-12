@@ -2,13 +2,12 @@ package test.carrent.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import test.carrent.service.RentService;
 
-@RestController
+import java.util.Map;
+
+@Controller
 public class CarRentController {
 
     @Autowired
@@ -19,7 +18,14 @@ public class CarRentController {
         return "index";
     }
 
-    @GetMapping("rentCar")
+    /**
+     * 租车
+     *
+     * @param carModel
+     * @return
+     */
+    @PostMapping("rentCar")
+    @ResponseBody
     public String rentCar(String carModel) {
         String result;
         boolean isLegalModel = rentService.isLegalModel(carModel);
@@ -35,7 +41,14 @@ public class CarRentController {
         return result;
     }
 
-    @GetMapping("restoreCar")
+    /**
+     * 还车
+     *
+     * @param carModel
+     * @return
+     */
+    @PostMapping("restoreCar")
+    @ResponseBody
     public String restoreCar(String carModel) {
         String result;
         boolean isLegalModel = rentService.isLegalModel(carModel);
@@ -49,6 +62,17 @@ public class CarRentController {
             result = "此类车型不存在";
         }
         return result;
+    }
+
+    /**
+     * 查询剩余可用车辆信息
+     *
+     * @return
+     */
+    @PostMapping("queryRemainCarInfo")
+    @ResponseBody
+    public Map<String, Integer> queryRemainCarInfo() {
+        return rentService.queryRemainCarInfo();
     }
 
 }
